@@ -1,0 +1,19 @@
+server:
+  port : 8081
+connections:
+  default-kafka:
+    clientType: standard
+    bootstrapServers: ${kafkaBootstrapServers}
+    producer:
+      props:
+        key.serializer: org.apache.kafka.common.serialization.StringSerializer
+        value.serializer: org.apache.kafka.common.serialization.StringSerializer
+        request.timeout.ms: 2000
+        max.block.ms: 2000
+    consumer:
+      topics:
+        - ${kafkaTopic}
+      props:
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        group.id: ${kafkaConsumerGroupId}
